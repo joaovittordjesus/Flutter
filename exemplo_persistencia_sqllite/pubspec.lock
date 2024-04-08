@@ -57,6 +57,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.3.1"
+<<<<<<< HEAD
   ffi:
     dependency: transitive
     description:
@@ -65,6 +66,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.2"
+=======
+>>>>>>> dde045ff2b247d32c368a85542a438538ccc8728
   flutter:
     dependency: "direct main"
     description: flutter
@@ -147,6 +150,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.9.0"
+<<<<<<< HEAD
   path_provider:
     dependency: "direct main"
     description:
@@ -211,6 +215,8 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.8"
+=======
+>>>>>>> dde045ff2b247d32c368a85542a438538ccc8728
   sky_engine:
     dependency: transitive
     description: flutter
@@ -228,10 +234,17 @@ packages:
     dependency: "direct main"
     description:
       name: sqflite
+<<<<<<< HEAD
       sha256: a9016f495c927cb90557c909ff26a6d92d9bd54fc42ba92e19d4e79d61e798c6
       url: "https://pub.dev"
     source: hosted
     version: "2.3.2"
+=======
+      sha256: "5ce2e1a15e822c3b4bfb5400455775e421da7098eed8adc8f26298ada7c9308c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.3.3"
+>>>>>>> dde045ff2b247d32c368a85542a438538ccc8728
   sqflite_common:
     dependency: transitive
     description:
@@ -304,6 +317,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "13.0.0"
+<<<<<<< HEAD
   win32:
     dependency: transitive
     description:
@@ -323,3 +337,8 @@ packages:
 sdks:
   dart: ">=3.3.0 <4.0.0"
   flutter: ">=3.10.0"
+=======
+sdks:
+  dart: ">=3.3.3 <4.0.0"
+  flutter: ">=3.7.0"
+>>>>>>> dde045ff2b247d32c368a85542a438538ccc8728
