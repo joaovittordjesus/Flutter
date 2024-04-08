@@ -1,6 +1,5 @@
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
-
 import 'Model.dart';
 
 class BancoDadosCrud {
@@ -12,7 +11,7 @@ class BancoDadosCrud {
       "CREATE TABLE IF NOT EXISTS contacts(id INTEGER PRIMARY KEY," +
           "nome TEXT, email TEXT, telefone TEXT," +
           "endereco TEXT)";
-  
+
   Future<Database> _getDatabase() async {
     return openDatabase(
       join(await getDatabasesPath(), DB_NOME), // Caminho do banco de dados
@@ -25,7 +24,7 @@ class BancoDadosCrud {
   }
 
   // Método para criar um novo contato no banco de dados
-  Future<void> create(ContatoModel model) async {
+  Future<void> create(ContactModel model) async {
     try {
       final Database db = await _getDatabase();
       await db.insert(
@@ -37,7 +36,7 @@ class BancoDadosCrud {
   }
 
   // Método para obter todos os contatos do banco de dados
-  Future<List<ContatoModel>> getContacts() async {
+  Future<List<ContactModel>> getContacts() async {
     try {
       final Database db = await _getDatabase();
       final List<Map<String, dynamic>> maps =
@@ -46,7 +45,7 @@ class BancoDadosCrud {
       return List.generate(
         maps.length,
         (i) {
-          return ContatoModel.fromMap(maps[
+          return ContactModel.fromMap(maps[
               i]); // Converte os resultados da consulta para objetos ContactModel
         },
       );
@@ -57,7 +56,7 @@ class BancoDadosCrud {
   }
 
   // Método para atualizar um contato no banco de dados
-  Future<void> update(ContatoModel model) async {
+  Future<void> update(ContactModel model) async {
     try {
       final Database db = await _getDatabase();
       await db.update(
