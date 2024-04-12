@@ -1,36 +1,38 @@
-class ContatoModel {
-  //atributos
+class UserModel {
   int id;
-  String nome;
+  String username;
+  String password;
   String email;
-  String telefone;
-  String endereco;
-  //construtor
-  ContatoModel({
+  String
+      theme; // Adicione o campo 'theme' para armazenar as configurações personalizadas do usuário
+
+  UserModel({
     required this.id,
-    required this.nome,
+    required this.username,
+    required this.password,
     required this.email,
-    required this.telefone,
-    required this.endereco,
+    required this.theme,
   });
-  //mapeamento
+
+  // Método para converter um usuário para um mapa (para salvar no banco de dados)
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'nome': nome,
+      'username': username,
+      'password': password,
       'email': email,
-      'telefone': telefone,
-      'endereco': endereco,
+      'theme': theme,
     };
   }
 
-  factory ContatoModel.fromMap(Map<String, dynamic> map) {
-    return ContatoModel(
+  // Método de fábrica para criar um objeto UserModel a partir de um mapa (para ler do banco de dados)
+  factory UserModel.fromMap(Map<String, dynamic> map) {
+    return UserModel(
       id: map['id'],
-      nome: map['nome'],
+      username: map['username'],
+      password: map['password'],
       email: map['email'],
-      telefone: map['telefone'],
-      endereco: map['endereco'],
+      theme: map['theme'],
     );
   }
 }
