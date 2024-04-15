@@ -1,29 +1,24 @@
 import 'package:flutter/material.dart';
-
-import 'View.dart';
+import 'package:seu_projeto/View.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-<<<<<<< HEAD
-      title: "Projeto SqlLite",
+      title: 'Authentication App',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: HomePage(),
+      initialRoute: '/login',
+      routes: {
+        '/login': (context) => LoginPage(),
+        '/signup': (context) => SignUpPage(),
+        '/settings': (context) => SettingsPage(),
+      },
     );
   }
 }
-=======
-      home:HomePage()
-    );
-  }
-}
->>>>>>> dde045ff2b247d32c368a85542a438538ccc8728

@@ -1,213 +1,156 @@
-<<<<<<< HEAD
-// View.dart
-
-// Importa o controlador do banco de dados e o modelo de contato
-import 'package:exemplo_persistencia_sqllite/DataBaseController.dart';
 import 'package:flutter/material.dart';
-import 'package:exemplo_persistencia_sqllite/Model.dart';
+import 'package:seu_projeto/DataBaseController.dart';
+import 'package:seu_projeto/Model.dart';
 
-// Classe responsável por exibir a página inicial do aplicativo
-class HomePage extends StatelessWidget {
-  // Instância do helper do banco de dados
-  final dbHelper = DataBaseHelper();
-=======
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+class LoginPage extends StatelessWidget {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-import 'Controller.dart';
-import 'Model.dart';
-
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
-
-  @override
-  State<HomePage> createState() => _HomePageState();
-}
-
-class _HomePageState extends State<HomePage> {
-  final dbHelper = BancoDadosCrud();
-  final _formKey = GlobalKey<FormState>();
-
-  // Controllers para os campos de texto
-  TextEditingController _idController = TextEditingController();
-  TextEditingController _nomeController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _telefoneController = TextEditingController();
-  TextEditingController _enderecoController = TextEditingController();
->>>>>>> dde045ff2b247d32c368a85542a438538ccc8728
+  final DataBaseHelper _dbHelper = DataBaseHelper();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-<<<<<<< HEAD
-        title: Text('SQLite Demo'), // Título da barra de aplicativos
+        title: Text('Login'),
       ),
-      body: FutureBuilder<List<ContactModel>>(
-        // Widget FutureBuilder para construir com base no futuro
-        future: dbHelper.getContacts(), // Obtém a lista de contatos do banco de dados
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            // Se estiver esperando pela conexão, exibe um indicador de carregamento
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            // Se houver um erro, exibe uma mensagem de erro
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            // Se não houver dados ou a lista estiver vazia, exibe uma mensagem
-            return Center(child: Text('No contacts found.'));
-          } else {
-            // Caso contrário, exibe a lista de contatos
-            return ListView.builder(
-              itemCount: snapshot.data?.length, // Número de itens na lista
-              itemBuilder: (context, index) {
-                final contact = snapshot.data?[index]; // Obtém o contato atual
-                return ListTile(
-                  // Widget ListTile para exibir os detalhes do contato
-                  title: Text(contact!.name), // Nome do contato
-                  subtitle: Text(contact.email), // Email do contato
-                  onTap: () {
-                    // Implementa a funcionalidade ao tocar no item da lista
-=======
-        title: Text('SQLite Demo'),
-      ),
-      body: FutureBuilder<List<ContatoModel>>(
-        future: dbHelper.getContacts(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('Nenhum Contato Cadastrado'));
-          } else {
-            return ListView.builder(
-              itemCount: snapshot.data?.length,
-              itemBuilder: (context, index) {
-                final contact = snapshot.data![index];
-                return ListTile(
-                  title: Text(contact.nome),
-                  subtitle: Text(contact.telefone),
-                  onTap: () {
-                    //criar um método para Ver informações do contato
->>>>>>> dde045ff2b247d32c368a85542a438538ccc8728
-                  },
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _usernameController,
+              decoration: InputDecoration(labelText: 'Username'),
+            ),
+            TextField(
+              controller: _passwordController,
+              decoration: InputDecoration(labelText: 'Password'),
+              obscureText: true,
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                // Realizar a autenticação do usuário
+                final UserModel? user = await _dbHelper.loginUser(
+                  _usernameController.text,
+                  _passwordController.text,
                 );
-              },
-            );
-          }
-        },
-      ),
-      floatingActionButton: FloatingActionButton(
-<<<<<<< HEAD
-        // Botão flutuante para adicionar novo contato
-        onPressed: () {
-          // Implementa a funcionalidade ao pressionar o botão
-        },
-        child: Icon(Icons.add), // Ícone do botão flutuante
-      ),
-    );
-  }
-=======
-        onPressed: () {
-          _showAddContactDialog(context);
-        },
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-
-  // Método para exibir um diálogo para adicionar um novo contato
-  void _showAddContactDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text('Adicionar Contato'),
-          content: Form(
-            key: _formKey,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                TextFormField(
-                  controller: _idController,
-                  decoration: InputDecoration(labelText: 'ID'),
-                  keyboardType: TextInputType
-                      .number, // Define o tipo de teclado para numérico
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter
-                        .digitsOnly // Permite apenas a entrada de dígitos
-                  ],
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter an ID';
-                    } else if (!RegExp(r'^[0-9]+$').hasMatch(value)) {
-                      return 'Please enter a valid ID (only digits allowed)';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _nomeController,
-                  decoration: InputDecoration(labelText: 'Nome'),
-                  validator: (value) {
-                    if (value!.isEmpty) {
-                      return 'Please enter a name';
-                    }
-                    return null;
-                  },
-                ),
-                TextFormField(
-                  controller: _emailController,
-                  decoration: InputDecoration(labelText: 'Email'),
-                ),
-                TextFormField(
-                  controller: _telefoneController,
-                  decoration: InputDecoration(labelText: 'Telefone'),
-                ),
-                TextFormField(
-                  controller: _enderecoController,
-                  decoration: InputDecoration(labelText: 'Endereço'),
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-              child: Text('Cancel'),
-            ),
-            TextButton(
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  _addContact();
-                  Navigator.of(context).pop();
+                if (user != null) {
+                  // Navegar para a próxima página após o login bem-sucedido
+                  Navigator.pushReplacementNamed(context, '/settings');
+                } else {
+                  // Exibir mensagem de erro se as credenciais forem inválidas
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text('Invalid username or password')),
+                  );
                 }
               },
-              child: Text('Add'),
+              child: Text('Login'),
             ),
           ],
-        );
-      },
+        ),
+      ),
     );
   }
+}
 
-  // Método para adicionar um novo contato ao banco de dados
-  void _addContact() {
-    final newContact = ContatoModel(
-      id: int.parse(_idController.text),
-      nome: _nomeController.text,
-      email: _emailController.text,
-      telefone: _telefoneController.text,
-      endereco: _enderecoController.text,
+class SignUpPage extends StatelessWidget {
+  final TextEditingController _usernameController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+
+  final DataBaseHelper _dbHelper = DataBaseHelper();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Sign Up'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _usernameController,
+              decoration: InputDecoration(labelText: 'Username'),
+            ),
+            TextField(
+              controller: _passwordController,
+              decoration: InputDecoration(labelText: 'Password'),
+              obscureText: true,
+            ),
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(labelText: 'Email'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                // Criar um novo usuário
+                final UserModel newUser = UserModel(
+                  id: 0, // O ID será gerado automaticamente pelo banco de dados
+                  username: _usernameController.text,
+                  password: _passwordController.text,
+                  email: _emailController.text,
+                  theme: 'default', // Define o tema padrão para o novo usuário
+                );
+                await _dbHelper.createUser(newUser);
+                // Navegar de volta para a tela de login após o registro bem-sucedido
+                Navigator.pushReplacementNamed(context, '/login');
+              },
+              child: Text('Sign Up'),
+            ),
+          ],
+        ),
+      ),
     );
-
-    dbHelper.create(newContact);
-    setState(() {
-      // Atualiza a lista de contatos
-    });
   }
->>>>>>> dde045ff2b247d32c368a85542a438538ccc8728
+}
+
+class SettingsPage extends StatefulWidget {
+  @override
+  _SettingsPageState createState() => _SettingsPageState();
+}
+
+class _SettingsPageState extends State<SettingsPage> {
+  final DataBaseHelper _dbHelper = DataBaseHelper();
+  final TextEditingController _themeController = TextEditingController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Settings'),
+      ),
+      body: Padding(
+        padding: EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            TextField(
+              controller: _themeController,
+              decoration: InputDecoration(labelText: 'Theme'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                final UserModel? currentUser = await _dbHelper
+                    .getCurrentUser(); // Implemente este método no DataBaseController.dart
+                if (currentUser != null) {
+                  await _dbHelper.updateUserTheme(
+                      currentUser.id, _themeController.text);
+                  // Aplicar o tema atualizado
+                  // Implemente esta funcionalidade conforme necessário para aplicar o tema personalizado
+                }
+              },
+              child: Text('Save Theme'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
