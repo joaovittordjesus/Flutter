@@ -6,6 +6,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sa3_academia/models/user_model.dart';
 
 class DatabaseHelper {
+  String colUserId = 'user_id'; // Adicione o atributo colUserId
   static DatabaseHelper? _databaseHelper;
   static Database? _database;
 
@@ -16,7 +17,8 @@ class DatabaseHelper {
   String colPassword = 'password';
   String colExerciseId = 'id'; // Coluna de ID para a tabela de exercícios
   String colExerciseName = 'name'; // Coluna de nome para a tabela de exercícios
-  String colExerciseIsCompleted = 'isCompleted'; // Coluna de conclusão para a tabela de exercícios
+  String colExerciseIsCompleted =
+      'isCompleted'; // Coluna de conclusão para a tabela de exercícios
 
   DatabaseHelper._createInstance();
 
@@ -45,26 +47,24 @@ class DatabaseHelper {
   }
 
   void _createDb(Database db, int newVersion) async {
-    await db.execute(
-      ''' 
+    await db.execute('''
       CREATE TABLE $userTable (
         $colId INTEGER PRIMARY KEY AUTOINCREMENT,
         $colUsername TEXT,
         $colPassword TEXT
       )
-      '''
-    );
+      ''');
 
     // Criação da tabela de exercícios
-    await db.execute(
-      ''' 
-      CREATE TABLE $exerciseTable (
-        $colExerciseId INTEGER PRIMARY KEY AUTOINCREMENT,
-        $colExerciseName TEXT,
-        $colExerciseIsCompleted INTEGER
-      )
-      '''
-    );
+    await db.execute('''
+    CREATE TABLE $exerciseTable (
+      $colExerciseId INTEGER PRIMARY KEY AUTOINCREMENT,
+      $colExerciseName TEXT,
+      $colExerciseIsCompleted INTEGER,
+      $colUserId INTEGER,
+      FOREIGN KEY ($colUserId) REFERENCES $userTable($colId)
+    )
+    ''');
   }
 
   Future<int> insertUser(UserModel user) async {
@@ -81,6 +81,7 @@ class DatabaseHelper {
     );
     if (maps.length > 0) {
       return UserModel(
+        id: maps[0][colId], // Obtenha o id do usuário do banco de dados
         username: maps[0][colUsername],
         password: maps[0][colPassword],
       );
@@ -119,7 +120,7 @@ class DatabaseHelper {
       return ExerciseModel(
         id: maps[index][colExerciseId],
         name: maps[index][colExerciseName],
-        isCompleted: maps[index][colExerciseIsCompleted] == 1,
+        //isCompleted: maps[index][colExerciseIsCompleted] == 1, userId: null,
       );
     });
   }
