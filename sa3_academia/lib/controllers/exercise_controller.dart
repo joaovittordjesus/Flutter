@@ -9,10 +9,6 @@ class ExerciseController {
     // Obtenha uma instância do banco de dados
     final db = await dbHelper.database;
 
-<<<<<<< HEAD
-    // Consulte os exercícios na tabela de exercícios
-    final List<Map<String, dynamic>> exerciseMaps = await db.query('exercise_table');
-=======
     // Defina exerciseTable e os campos de coluna como strings
     String exerciseTable = 'exercise_table';
     String colExerciseId = 'id';
@@ -23,21 +19,15 @@ class ExerciseController {
     // Consulte os exercícios na tabela de exercícios
     final List<Map<String, dynamic>> exerciseMaps =
         await db.query(exerciseTable);
->>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
 
     // Converta a lista de mapas em uma lista de objetos ExerciseModel
     return List.generate(exerciseMaps.length, (i) {
       return ExerciseModel(
-<<<<<<< HEAD
-        name: exerciseMaps[i]['name'],
-        isCompleted: exerciseMaps[i]['is_completed'] == 1 ? true : false,
-=======
         id: exerciseMaps[i][colExerciseId],
         name: exerciseMaps[i][colExerciseName],
         isCompleted:
             exerciseMaps[i][colExerciseIsCompleted] == 1 ? true : false,
         userId: exerciseMaps[i][colUserId],
->>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
       );
     });
   }
