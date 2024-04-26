@@ -1,5 +1,9 @@
 // lib\controllers\register_controller.dart
 import 'package:flutter/material.dart';
+<<<<<<< HEAD
+=======
+import 'package:sa3_academia/models/exercise_model.dart';
+>>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
 import 'package:sa3_academia/models/user_model.dart';
 import 'package:sa3_academia/utils/database_helper.dart';
 
@@ -10,15 +14,30 @@ class RegisterController {
       BuildContext context, String username, String password) async {
     // Verifica se já existe um usuário com o mesmo nome de usuário
     final existingUser = await dbHelper.getUser(username);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
     // Se não existir um usuário com o mesmo nome de usuário, podemos registrar o novo usuário
     if (existingUser == null) {
       // Cria um novo objeto UserModel com o nome de usuário e senha fornecidos
       UserModel newUser = UserModel(username: username, password: password);
+<<<<<<< HEAD
       
       // Insere o novo usuário no banco de dados
       await dbHelper.insertUser(newUser);
       
+=======
+      int userId = await dbHelper.insertUser(newUser);
+
+      // Insere o novo usuário no banco de dados
+      await dbHelper.insertUser(newUser);
+
+      //Criando uma lista de exercícios padrão ao registrar o usuário
+      await _insertDefaultExercisesForUser(newUser);
+
+>>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
       // Retorna true indicando que o registro foi bem-sucedido
       return true;
     } else {
@@ -26,4 +45,28 @@ class RegisterController {
       return false;
     }
   }
+<<<<<<< HEAD
+=======
+
+  Future<void> _insertDefaultExercisesForUser(UserModel user) async {
+    List<ExerciseModel> defaultExercises = _createDefaultExercises();
+    for (ExerciseModel exercise in defaultExercises) {
+      // Associe corretamente o id do usuário aos exercícios
+      exercise.userId = user.id!;
+      await dbHelper.insertExercise(exercise);
+    }
+  }
+
+  List<ExerciseModel> _createDefaultExercises() {
+    //Cria uma lista de exercícios padrão
+    List<ExerciseModel> defaultExercises = [];
+    defaultExercises.add(ExerciseModel(name: "Exercise 1:"));
+    defaultExercises.add(ExerciseModel(name: "Exercise 2:"));
+    defaultExercises.add(ExerciseModel(name: "Exercise 3:"));
+    defaultExercises.add(ExerciseModel(name: "Exercise 4:"));
+    defaultExercises.add(ExerciseModel(name: "Exercise 5:"));
+    defaultExercises.add(ExerciseModel(name: "Exercise 6:"));
+    return defaultExercises;
+  }
+>>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
 }

@@ -6,6 +6,10 @@ import 'package:sqflite/sqflite.dart';
 import 'package:sa3_academia/models/user_model.dart';
 
 class DatabaseHelper {
+<<<<<<< HEAD
+=======
+  String colUserId = 'user_id'; // Adicione o atributo colUserId
+>>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
   static DatabaseHelper? _databaseHelper;
   static Database? _database;
 
@@ -16,7 +20,12 @@ class DatabaseHelper {
   String colPassword = 'password';
   String colExerciseId = 'id'; // Coluna de ID para a tabela de exercícios
   String colExerciseName = 'name'; // Coluna de nome para a tabela de exercícios
+<<<<<<< HEAD
   String colExerciseIsCompleted = 'isCompleted'; // Coluna de conclusão para a tabela de exercícios
+=======
+  String colExerciseIsCompleted =
+      'isCompleted'; // Coluna de conclusão para a tabela de exercícios
+>>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
 
   DatabaseHelper._createInstance();
 
@@ -45,13 +54,18 @@ class DatabaseHelper {
   }
 
   void _createDb(Database db, int newVersion) async {
+<<<<<<< HEAD
     await db.execute(
       ''' 
+=======
+    await db.execute('''
+>>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
       CREATE TABLE $userTable (
         $colId INTEGER PRIMARY KEY AUTOINCREMENT,
         $colUsername TEXT,
         $colPassword TEXT
       )
+<<<<<<< HEAD
       '''
     );
 
@@ -65,6 +79,20 @@ class DatabaseHelper {
       )
       '''
     );
+=======
+      ''');
+
+    // Criação da tabela de exercícios
+    await db.execute('''
+    CREATE TABLE $exerciseTable (
+      $colExerciseId INTEGER PRIMARY KEY AUTOINCREMENT,
+      $colExerciseName TEXT,
+      $colExerciseIsCompleted INTEGER,
+      $colUserId INTEGER,
+      FOREIGN KEY ($colUserId) REFERENCES $userTable($colId)
+    )
+    ''');
+>>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
   }
 
   Future<int> insertUser(UserModel user) async {
@@ -81,6 +109,10 @@ class DatabaseHelper {
     );
     if (maps.length > 0) {
       return UserModel(
+<<<<<<< HEAD
+=======
+        id: maps[0][colId], // Obtenha o id do usuário do banco de dados
+>>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
         username: maps[0][colUsername],
         password: maps[0][colPassword],
       );
@@ -119,7 +151,11 @@ class DatabaseHelper {
       return ExerciseModel(
         id: maps[index][colExerciseId],
         name: maps[index][colExerciseName],
+<<<<<<< HEAD
         isCompleted: maps[index][colExerciseIsCompleted] == 1,
+=======
+        //isCompleted: maps[index][colExerciseIsCompleted] == 1, userId: null,
+>>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
       );
     });
   }
