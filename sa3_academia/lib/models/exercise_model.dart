@@ -1,13 +1,3 @@
-<<<<<<< HEAD
-class ExerciseModel {
-  final String name;
-  bool isCompleted;
-
-  ExerciseModel({
-    required this.name,
-    this.isCompleted = false});
-}
-=======
 // lib\models\exercise_model.dart
 import 'package:flutter/material.dart';
 
@@ -42,4 +32,3 @@ class ExerciseModel {
     );
   }
 }
->>>>>>> 8ba65a1796dae57f2acd978c23c4cf3ee080780b
