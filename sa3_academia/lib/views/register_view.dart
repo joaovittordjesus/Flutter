@@ -1,7 +1,6 @@
 // lib\views\register_view.dart
 import 'package:flutter/material.dart';
 import 'package:sa3_academia/controllers/register_controller.dart';
-import 'package:sa3_academia/views/login_view.dart';
 
 class RegisterView extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
@@ -41,7 +40,8 @@ class RegisterView extends StatelessWidget {
                 } else {
                   // Se o registro falhar, exibimos uma mensagem de erro
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text('Registration failed. Username already in use.'),
+                    content:
+                        Text('Registration failed. Username already in use.'),
                   ));
                 }
               },

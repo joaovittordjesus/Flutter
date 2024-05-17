@@ -35,7 +35,7 @@ class RegisterController {
     List<ExerciseModel> defaultExercises = _createDefaultExercises();
     for (ExerciseModel exercise in defaultExercises) {
       // Associe corretamente o id do usuário aos exercícios
-      exercise.userId = user.id!;
+      exercise.userId = user.id;
       await dbHelper.insertExercise(exercise);
     }
   }

@@ -39,12 +39,15 @@ class LoginView extends StatelessWidget {
                   // Se o login for bem-sucedido, navegar para a tela de lista de exercícios
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => ExerciseListView()), // Navega para a tela de lista de exercícios
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ExerciseListView()), // Navega para a tela de lista de exercícios
                   );
                 } else {
                   // Se o login falhar, exibir mensagem de erro
                   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text('Login failed. Please check your credentials.'),
+                    content:
+                        Text('Login failed. Please check your credentials.'),
                   ));
                 }
               },

@@ -1,0 +1,17 @@
+[
+    {
+        "nome": "CPU",
+        "preco": 789.84,
+        "categoria": "hardware"
+    },
+    {
+        "nome": "Camiseta Linux",
+        "preco": 23.67,
+        "categoria": "Vestimenta" 
+    },
+    {
+        "nome": "Mouse Pad Control",
+        "preco": 60,
+        "categoria": "Vestimenta"
+    }
+]

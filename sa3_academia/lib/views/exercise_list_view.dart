@@ -22,7 +22,8 @@ class _ExerciseListViewState extends State<ExerciseListView> {
   // Função assíncrona para carregar os exercícios do banco de dados
   _loadExercises() async {
     // Chamamos o método assíncrono fetchExercises do ExerciseController
-    List<ExerciseModel> fetchedExercises = await _exerciseController.fetchExercises();
+    List<ExerciseModel> fetchedExercises =
+        await _exerciseController.fetchExercises();
     setState(() {
       // Atualizamos o estado com os exercícios recuperados do banco de dados
       exercises = fetchedExercises;

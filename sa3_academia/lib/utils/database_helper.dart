@@ -61,8 +61,8 @@ class DatabaseHelper {
       $colExerciseId INTEGER PRIMARY KEY AUTOINCREMENT,
       $colExerciseName TEXT,
       $colExerciseIsCompleted INTEGER,
-      $colUserId INTEGER,
-      FOREIGN KEY ($colUserId) REFERENCES $userTable($colId)
+      $colUserId INTEGER,  -- Adicionando a coluna userId
+      FOREIGN KEY ($colUserId) REFERENCES $userTable($colId)  -- Adicionando uma restrição de chave estrangeira
     )
     ''');
   }
