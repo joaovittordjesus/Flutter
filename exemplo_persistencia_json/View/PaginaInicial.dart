@@ -14,6 +14,11 @@ class HomePage extends StatelessWidget {
     final TextEditingController _categoriaController = TextEditingController();
 
     @override
+    void initState(){
+      
+    }
+
+    @override
     Widget build(BuildContext context){
     return const Placeholder();
     }
