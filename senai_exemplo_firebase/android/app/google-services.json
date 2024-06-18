@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "168085468777",
+    "project_id": "senai-firebase-teste-joao",
+    "storage_bucket": "senai-firebase-teste-joao.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168085468777:android:9e4d8cd2490aef8b1514f8",
+        "android_client_info": {
+          "package_name": "com.senai.firebaseteste.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkOSovlscpPoHylOMuE9k0YbB1CRixpTU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
